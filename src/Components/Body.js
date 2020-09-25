@@ -8,15 +8,8 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-import useWebAnimations, {
-  flipInX,
-  rubberBand,
-  flash,
-  zoomInDown,
-  lightSpeedInLeft,
-  lightSpeedInRight,
-  shakeY,
-} from "@wellyshen/use-web-animations";
+import useWebAnimations from "@wellyshen/use-web-animations";
+
 import {
   Bridge,
   Build,
@@ -32,6 +25,32 @@ import {
   Maintain_Security,
   Partnerships,
 } from "../Images";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+AOS.init();
+
+AOS.init({
+  // Global settings:
+  disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+  startEvent: "DOMContentLoaded", // name of the event dispatched on the document, that AOS should initialize on
+  initClassName: "aos-init", // class applied after initialization
+  animatedClassName: "aos-animate", // class applied on animation
+  useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+  disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+  debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+  throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+
+  // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+  offset: 120, // offset (in px) from the original trigger point
+  delay: 0, // values from 0 to 3000, with step 50ms
+  duration: 400, // values from 0 to 3000, with step 50ms
+  easing: "ease", // default easing for AOS animations
+  once: false, // whether animation should happen only once - while scrolling down
+  mirror: false, // whether elements should animate out while scrolling past them
+  anchorPlacement: "top-bottom", // defines which position of the element regarding to window should trigger the animation
+});
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -313,22 +332,7 @@ const useStyles = makeStyles((theme) =>
 
 const Body = () => {
   const classes = useStyles();
-
-  const { ref: header } = useWebAnimations({ ...flipInX });
-  const { ref: heading1 } = useWebAnimations({ ...zoomInDown });
-  const { ref: heading2 } = useWebAnimations({ ...rubberBand });
-  const { ref: container1 } = useWebAnimations({ ...flash });
-  const { ref: container2_1 } = useWebAnimations({ ...lightSpeedInLeft });
-  const { ref: container2_2 } = useWebAnimations({ ...lightSpeedInLeft });
-  const { ref: container2_3 } = useWebAnimations({ ...lightSpeedInRight });
-  const { ref: container2_4 } = useWebAnimations({ ...lightSpeedInLeft });
-  const { ref: container2_5 } = useWebAnimations({ ...lightSpeedInRight });
-  const { ref: container2_6 } = useWebAnimations({ ...lightSpeedInLeft });
-  const { ref: container2_7 } = useWebAnimations({ ...lightSpeedInRight });
-  const { ref: container2_8 } = useWebAnimations({ ...lightSpeedInRight });
-  const { ref: container2_9 } = useWebAnimations({ ...lightSpeedInRight });
-  const { ref: container3_heading } = useWebAnimations({ ...shakeY });
-  const { ref: container3_para } = useWebAnimations({ ...flash });
+  
   const { ref: build } = useWebAnimations({
     keyframes: [
       { transform: "translateY(0%)" },
@@ -444,7 +448,7 @@ const Body = () => {
         <hr className={classes.lineOrange} />
         <Grid style={{ margin: "2%" }} item sm={12} md={12}>
           <Typography
-            ref={header}
+            data-aos="flip-up"
             variant="h3"
             className={classes.header}
             gutterBottom
@@ -509,10 +513,9 @@ const Body = () => {
           <hr className={classes.lineBlue} />
         </Grid>
 
-        <Grid item xs={12} sm={12} md={12}>
+        <Grid data-aos="zoom-in-down" item xs={12} sm={12} md={12}>
           <div className={classes.heading}>
             <Typography
-              ref={heading1}
               className={classes.heading1}
               variant="h3"
               gutterBottom
@@ -520,7 +523,6 @@ const Body = () => {
               Syscoin Platform
             </Typography>
             <Typography
-              ref={heading2}
               className={classes.heading2}
               variant="h5"
               gutterBottom
@@ -530,7 +532,11 @@ const Body = () => {
           </div>
         </Grid>
 
-        <div ref={container1} className={classes.container1}>
+        <div
+          data-aos="fade-up"
+          data-aos-duration="3000"
+          className={classes.container1}
+        >
           <Grid
             className={classes.container1_content}
             item
@@ -633,7 +639,9 @@ const Body = () => {
         </div>
 
         <div
-          ref={container2_1}
+          data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
           style={{ marginBottom: "-7%" }}
           className={classes.container2_1}
         >
@@ -674,7 +682,12 @@ const Body = () => {
           </Grid>
         </div>
 
-        <div ref={container2_2} className={classes.container2_1}>
+        <div
+          data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
+          className={classes.container2_1}
+        >
           <Grid
             className={classes.container2_content}
             item
@@ -723,7 +736,12 @@ const Body = () => {
           </Grid>
         </div>
 
-        <div ref={container2_3} className={classes.container2_2}>
+        <div
+          data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
+          className={classes.container2_2}
+        >
           <Grid
             ref={token}
             className={classes.container2Img}
@@ -770,7 +788,12 @@ const Body = () => {
           </Grid>
         </div>
 
-        <div ref={container2_4} className={classes.container2_1}>
+        <div
+          data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
+          className={classes.container2_1}
+        >
           <Grid
             className={classes.container2_content}
             item
@@ -845,7 +868,12 @@ const Body = () => {
           </Grid>
         </div>
 
-        <div ref={container2_5} className={classes.container2_2}>
+        <div
+          data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
+          className={classes.container2_2}
+        >
           <Grid
             ref={masternodes}
             className={classes.container2Img}
@@ -896,7 +924,9 @@ const Body = () => {
         </div>
 
         <div
-          ref={container2_6}
+          data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
           style={{ marginBottom: "-10%" }}
           className={classes.container2_1}
         >
@@ -948,11 +978,19 @@ const Body = () => {
           </Grid>
         </div>
 
-        <Grid className={classes.container3} item xs={12} sm={12} md={12}>
+        <Grid
+          data-aos="flip-left"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="2000"
+          className={classes.container3}
+          item
+          xs={12}
+          sm={12}
+          md={12}
+        >
           <hr className={classes.lineOrange} />
           <div className={classes.container3_content}>
             <Typography
-              ref={container3_heading}
               className={classes.container3_heading}
               variant="h3"
               gutterBottom
@@ -960,7 +998,6 @@ const Body = () => {
               Scale as Your Business Grows
             </Typography>
             <Typography
-              ref={container3_para}
               className={classes.container3_para}
               variant="h6"
               gutterBottom
@@ -983,7 +1020,12 @@ const Body = () => {
           </Button>
         </Grid>
 
-        <div ref={container2_7} className={classes.container2_2}>
+        <div
+          data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
+          className={classes.container2_2}
+        >
           <Grid
             ref={security}
             className={classes.container2Img}
@@ -1027,7 +1069,12 @@ const Body = () => {
           </Grid>
         </div>
 
-        <div ref={container2_8} className={classes.container2_2}>
+        <div
+          data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
+          className={classes.container2_2}
+        >
           <Grid
             ref={partnerships}
             className={classes.container2Img}
@@ -1069,7 +1116,12 @@ const Body = () => {
           </Grid>
         </div>
 
-        <div ref={container2_9} className={classes.container2_2}>
+        <div
+          data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
+          className={classes.container2_2}
+        >
           <Grid
             ref={community}
             className={classes.container2Img}
