@@ -8,7 +8,7 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-import useWebAnimations from "@wellyshen/use-web-animations";
+import useWebAnimations, { flipInX } from "@wellyshen/use-web-animations";
 
 import {
   Bridge,
@@ -332,7 +332,7 @@ const useStyles = makeStyles((theme) =>
 
 const Body = () => {
   const classes = useStyles();
-  
+  const { ref: header } = useWebAnimations({ ...flipInX });
   const { ref: build } = useWebAnimations({
     keyframes: [
       { transform: "translateY(0%)" },
@@ -448,7 +448,7 @@ const Body = () => {
         <hr className={classes.lineOrange} />
         <Grid style={{ margin: "2%" }} item sm={12} md={12}>
           <Typography
-            data-aos="flip-up"
+            ref={header}
             variant="h3"
             className={classes.header}
             gutterBottom
@@ -515,18 +515,10 @@ const Body = () => {
 
         <Grid data-aos="zoom-in-down" item xs={12} sm={12} md={12}>
           <div className={classes.heading}>
-            <Typography
-              className={classes.heading1}
-              variant="h3"
-              gutterBottom
-            >
+            <Typography className={classes.heading1} variant="h3" gutterBottom>
               Syscoin Platform
             </Typography>
-            <Typography
-              className={classes.heading2}
-              variant="h5"
-              gutterBottom
-            >
+            <Typography className={classes.heading2} variant="h5" gutterBottom>
               Key Features
             </Typography>
           </div>
